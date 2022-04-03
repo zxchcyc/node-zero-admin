@@ -2,6 +2,9 @@
   "name": "node-zero-admin",
   "version": "1.0.0",
   "private": true,
+  "author": "archer zheng",
+  "description": "node-zero 后台管理系统",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
