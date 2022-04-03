@@ -16,18 +16,18 @@
 </template>
 
 <script setup>
-import Menu from './Menu'
-import Headers from './headers'
-import { computed } from 'vue'
-import variables from '@/styles/variables.scss'
-import { useStore } from 'vuex'
-const store = useStore()
+import Menu from './Menu';
+import Headers from './headers';
+import { computed } from 'vue';
+import variables from '@/styles/variables.scss';
+import { useStore } from 'vuex';
+const store = useStore();
 // const asideWidth = ref(variables.sideBarWidth)
 const asideWidth = computed(() => {
   return store.getters.siderType
     ? variables.sideBarWidth
-    : variables.hideSideBarWidth
-})
+    : variables.hideSideBarWidth;
+});
 </script>
 
 <style lang="scss" scoped>

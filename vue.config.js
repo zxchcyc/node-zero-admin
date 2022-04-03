@@ -1,24 +1,24 @@
-const AutoImport = require('unplugin-auto-import/webpack')
-const Components = require('unplugin-vue-components/webpack')
-const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+const AutoImport = require('unplugin-auto-import/webpack');
+const Components = require('unplugin-vue-components/webpack');
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
 
-const path = require('path')
+const path = require('path');
 function resolve(dir) {
-  return path.join(__dirname, dir)
+  return path.join(__dirname, dir);
 }
-const webpack = require('webpack')
+const webpack = require('webpack');
 module.exports = {
   configureWebpack: (config) => {
     config.plugins.push(
       AutoImport({
         resolvers: [ElementPlusResolver()]
       })
-    )
+    );
     config.plugins.push(
       Components({
         resolvers: [ElementPlusResolver()]
       })
-    )
+    );
   },
   chainWebpack(config) {
     // 设置 svg-sprite-loader
@@ -30,7 +30,7 @@ module.exports = {
       // 忽略
       .exclude.add(resolve('src/icons'))
       // 结束
-      .end()
+      .end();
     // config.module 表示创建一个具名规则，以后用来修改规则
     config.module
       // 规则
@@ -50,10 +50,10 @@ module.exports = {
         symbolId: 'icon-[name]'
       })
       // 结束
-      .end()
+      .end();
     config
       .plugin('ignore')
-      .use(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/))
+      .use(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/));
     config.module
       .rule('icons')
       .test(/\.svg$/)
@@ -64,7 +64,7 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-      .end()
+      .end();
   },
   devServer: {
     https: false,
@@ -90,4 +90,4 @@ module.exports = {
       }
     }
   }
-}
+};

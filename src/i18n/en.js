@@ -42,4 +42,4 @@ export default {
     hamburgerBtn: 'hamburgerBtn',
     fullScreen: 'fullScreen'
   }
-}
+};

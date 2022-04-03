@@ -5,17 +5,17 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue'
+import { defineProps, computed } from 'vue';
 const props = defineProps({
   icon: {
     type: String,
     required: true
   }
-})
+});
 
 const iconName = computed(() => {
-  return `#icon-${props.icon}`
-})
+  return `#icon-${props.icon}`;
+});
 </script>
 
 <style lang="scss" scoped>

@@ -12,28 +12,28 @@
 </template>
 
 <script setup>
-import { watch, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-const route = useRoute()
-const router = useRouter()
+import { watch, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
 
-const breadcrumbList = ref([])
+const breadcrumbList = ref([]);
 
 const initBreadcrumbList = () => {
-  breadcrumbList.value = route.matched
-  console.log(route.matched)
-}
+  breadcrumbList.value = route.matched;
+  console.log(route.matched);
+};
 const handleRedirect = (path) => {
-  router.push(path)
-}
+  router.push(path);
+};
 
 watch(
   route,
   () => {
-    initBreadcrumbList()
+    initBreadcrumbList();
   },
   { deep: true, immediate: true }
-)
+);
 </script>
 
 <style lang="scss" scoped>

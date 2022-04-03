@@ -1,19 +1,19 @@
-import router from './index'
-import store from '@/store'
+import router from './index';
+import store from '@/store';
 
-const whiteList = ['/login']
+const whiteList = ['/login'];
 router.beforeEach((to, from, next) => {
   if (store.getters.token) {
     if (to.path === '/login') {
-      next('/')
+      next('/');
     } else {
-      next()
+      next();
     }
   } else {
     if (whiteList.includes(to.path)) {
-      next()
+      next();
     } else {
-      next('/login')
+      next('/login');
     }
   }
-})
+});

@@ -24,13 +24,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useStore } from 'vuex'
-const store = useStore()
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore();
 const form = ref({
   username: 'admin',
   password: '123456'
-})
+});
 
 const rules = ref({
   username: [
@@ -47,28 +47,28 @@ const rules = ref({
       trigger: 'blur'
     }
   ]
-})
+});
 
-const formRef = ref(null)
+const formRef = ref(null);
 const handleLogin = () => {
   formRef.value.validate(async (valid) => {
     if (valid) {
-      store.dispatch('app/login', form.value)
+      store.dispatch('app/login', form.value);
     } else {
-      console.log('error submit!!')
-      return false
+      console.log('error submit!!');
+      return false;
     }
-  })
-}
+  });
+};
 
-const passwordType = ref('password')
+const passwordType = ref('password');
 const changeType = () => {
   if (passwordType.value === 'password') {
-    passwordType.value = 'text'
+    passwordType.value = 'text';
   } else {
-    passwordType.value = 'password'
+    passwordType.value = 'password';
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

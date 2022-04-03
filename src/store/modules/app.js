@@ -1,6 +1,6 @@
-import { login as loginApi } from '@/api/login'
-import router from '@/router'
-import { setTokenTime } from '@/utils/auth'
+import { login as loginApi } from '@/api/login';
+import router from '@/router';
+import { setTokenTime } from '@/utils/auth';
 export default {
   namespaced: true,
   state: () => ({
@@ -10,14 +10,14 @@ export default {
   }),
   mutations: {
     setToken(state, token) {
-      state.token = token
-      localStorage.setItem('token', token)
+      state.token = token;
+      localStorage.setItem('token', token);
     },
     changeSiderType(state) {
-      state.siderType = !state.siderType
+      state.siderType = !state.siderType;
     },
     changLang (state, lang) {
-      state.lang = lang
+      state.lang = lang;
     }
   },
   actions: {
@@ -25,22 +25,22 @@ export default {
       return new Promise((resolve, reject) => {
         loginApi(userInfo)
           .then((res) => {
-            console.log(res)
-            commit('setToken', res.token)
-            setTokenTime()
-            router.replace('/')
-            resolve()
+            console.log(res);
+            commit('setToken', res.token);
+            setTokenTime();
+            router.replace('/');
+            resolve();
           })
           .catch((err) => {
-            reject(err)
-          })
-      })
+            reject(err);
+          });
+      });
     },
     // 退出
     logout({ commit }) {
-      commit('setToken', '')
-      localStorage.clear()
-      router.replace('/login')
+      commit('setToken', '');
+      localStorage.clear();
+      router.replace('/login');
     }
   }
-}
+};

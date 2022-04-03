@@ -42,4 +42,4 @@ export default {
     hamburgerBtn: '汉堡按钮',
     fullScreen: '全屏按钮'
   }
-}
+};

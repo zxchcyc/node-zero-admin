@@ -5,15 +5,15 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
-import { computed } from 'vue'
-const store = useStore()
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+const store = useStore();
 const toggleClick = () => {
-  store.commit('app/changeSiderType')
-}
+  store.commit('app/changeSiderType');
+};
 const icon = computed(() => {
-  return store.getters.siderType ? 'hamburger-opened' : 'hamburger-closed'
-})
+  return store.getters.siderType ? 'hamburger-opened' : 'hamburger-closed';
+});
 </script>
 
 <style lang="scss" scoped>

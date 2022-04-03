@@ -5,27 +5,27 @@
 </template>
 
 <script setup>
-import screenfull from 'screenfull'
-import { ref, onMounted, onBeforeMount } from 'vue'
+import screenfull from 'screenfull';
+import { ref, onMounted, onBeforeMount } from 'vue';
 
-const icon = ref(screenfull.isFullscreen)
+const icon = ref(screenfull.isFullscreen);
 const handleFullScreen = () => {
   if (screenfull.isEnabled) {
-    screenfull.toggle()
+    screenfull.toggle();
   }
-}
+};
 
 const changeIcon = () => {
-  icon.value = screenfull.isFullscreen
-}
+  icon.value = screenfull.isFullscreen;
+};
 
 onMounted(() => {
-  screenfull.on('change', changeIcon)
-})
+  screenfull.on('change', changeIcon);
+});
 
 onBeforeMount(() => {
-  screenfull.off('change')
-})
+  screenfull.off('change');
+});
 </script>
 
 <style lang="scss" scoped></style>

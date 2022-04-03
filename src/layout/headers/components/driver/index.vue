@@ -5,17 +5,17 @@
 </template>
 
 <script setup>
-import Driver from 'driver.js'
-import 'driver.js/dist/driver.min.css'
-import { onMounted } from 'vue'
-import { steps } from './steps'
-import { watchLang } from '@/i18n/watchlang'
-import i18n from '@/i18n'
-const t = i18n.global.t
-let driver
+import Driver from 'driver.js';
+import 'driver.js/dist/driver.min.css';
+import { onMounted } from 'vue';
+import { steps } from './steps';
+import { watchLang } from '@/i18n/watchlang';
+import i18n from '@/i18n';
+const t = i18n.global.t;
+let driver;
 onMounted(() => {
-  initDriver()
-})
+  initDriver();
+});
 
 const initDriver = () => {
   driver = new Driver({
@@ -29,14 +29,14 @@ const initDriver = () => {
     stageBackground: '#ffffff', // Background color for the staged behind highlighted element
     nextBtnText: t('driver.nextBtnText'), // Next button text for this step
     prevBtnText: t('driver.prevBtnText') // Previous button text for this step
-  })
-}
-watchLang(initDriver)
+  });
+};
+watchLang(initDriver);
 
 const handleGuide = () => {
-  driver.defineSteps(steps(t))
-  driver.start()
-}
+  driver.defineSteps(steps(t));
+  driver.start();
+};
 </script>
 
 <style lang="scss" scoped></style>
