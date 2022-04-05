@@ -1,55 +1,55 @@
 <template>
-  <el-container class="app-wrapper">
-    <el-aside :width="asideWidth" class="sidebar-container">
-      <Menu />
-    </el-aside>
-    <el-container
-      class="container"
-      :class="{ hidderContainer: !$store.getters.siderType }"
-    >
-      <el-header><Headers /></el-header>
-      <el-main>
-        <router-view />
-      </el-main>
-    </el-container>
-  </el-container>
+	<component :is="getThemeConfig.layout" />
 </template>
 
-<script setup>
-import Menu from './Menu';
-import Headers from './headers';
-import { computed } from 'vue';
-import variables from '@/styles/variables.scss';
-import { useStore } from 'vuex';
-const store = useStore();
-// const asideWidth = ref(variables.sideBarWidth)
-const asideWidth = computed(() => {
-  return store.getters.siderType
-    ? variables.sideBarWidth
-    : variables.hideSideBarWidth;
+<script lang="ts">
+import { computed, onBeforeMount, onUnmounted, getCurrentInstance, defineComponent, defineAsyncComponent } from 'vue';
+import { useStore } from '/@/store/index';
+import { Local } from '/@/utils/storage';
+export default defineComponent({
+	name: 'layout',
+	components: {
+		defaults: defineAsyncComponent(() => import('/@/layout/main/defaults.vue')),
+		classic: defineAsyncComponent(() => import('/@/layout/main/classic.vue')),
+		transverse: defineAsyncComponent(() => import('/@/layout/main/transverse.vue')),
+		columns: defineAsyncComponent(() => import('/@/layout/main/columns.vue')),
+	},
+	setup() {
+		const { proxy } = <any>getCurrentInstance();
+		const store = useStore();
+		// 获取布局配置信息
+		const getThemeConfig = computed(() => {
+			return store.state.themeConfig.themeConfig;
+		});
+		// 窗口大小改变时(适配移动端)
+		const onLayoutResize = () => {
+			if (!Local.get('oldLayout')) Local.set('oldLayout', getThemeConfig.value.layout);
+			const clientWidth = document.body.clientWidth;
+			if (clientWidth < 1000) {
+				getThemeConfig.value.isCollapse = false;
+				proxy.mittBus.emit('layoutMobileResize', {
+					layout: 'defaults',
+					clientWidth,
+				});
+			} else {
+				proxy.mittBus.emit('layoutMobileResize', {
+					layout: Local.get('oldLayout') ? Local.get('oldLayout') : getThemeConfig.value.layout,
+					clientWidth,
+				});
+			}
+		};
+		// 页面加载前
+		onBeforeMount(() => {
+			onLayoutResize();
+			window.addEventListener('resize', onLayoutResize);
+		});
+		// 页面卸载时
+		onUnmounted(() => {
+			window.removeEventListener('resize', onLayoutResize);
+		});
+		return {
+			getThemeConfig,
+		};
+	},
 });
 </script>
-
-<style lang="scss" scoped>
-.app-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.container {
-  width: calc(100% - $sideBarWidth);
-  height: 100%;
-
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9;
-  transition: all 0.28s;
-  &.hidderContainer {
-    width: calc(100% - $hideSideBarWidth);
-  }
-}
-::v-deep .el-header {
-  padding: 0;
-}
-</style>

@@ -1,24 +1,20 @@
-# node-zero-admin
+#### ⚡ 使用说明
 
-## Project setup
-```
-yarn install
-```
+请看 https://gitee.com/lyt-top/vue-next-admin.git
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+```bash
+# 克隆项目
+git clone https://gitee.com/lyt-top/vue-next-admin.git
 
-### Compiles and minifies for production
-```
-yarn build
-```
+# 进入项目
+cd vue-next-admin
 
-### Lints and fixes files
-```
-yarn lint
-```
+# 安装依赖
+cnpm install
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 运行项目
+cnpm run dev
+
+# 打包发布
+cnpm run build
+```
